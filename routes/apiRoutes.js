@@ -1,26 +1,100 @@
 var db = require("../models");
+require("dotenv").config();
+var keys = require("../keys");
+var axios = require("axios");
 
-module.exports = function(app) {
+// const apiHeader = {
+//   'api_token': keys.appKeys.wt
+// };
+
+module.exports = function (app) {
   // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
+  app.get("/api/examples", function (req, res) {
+    db.Example.findAll({}).then(function (dbExamples) {
       res.json(dbExamples);
     });
   });
 
   // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
+  app.post("/api/examples", function (req, res) {
+    db.Example.create(req.body).then(function (dbExample) {
       res.json(dbExample);
     });
   });
 
   // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(
+  app.delete("/api/examples/:id", function (req, res) {
+    db.Example.destroy({ where: { id: req.params.id } }).then(function (
       dbExample
     ) {
       res.json(dbExample);
     });
+  });
+
+  app.get("/api/stocks", (req, res) => {
+    axios
+      .get(
+        "https://api.worldtradingdata.com/api/v1/stock?symbol=SNAP,TWTR,VOD.L&api_token=" +
+        keys.appKeys.wt
+      )
+      .then(response => {
+        const dataArr = response.data.data;
+        // console.log(dataArr);
+        // const resObj = [];
+        const resObj = {
+          symbols: [],
+          prices: []
+        };
+        dataArr.forEach(el => {
+          // resObj.push({ price: el.price, symbol: el.symbol });
+          resObj.symbols.push(el.symbol);
+          resObj.prices.push(el.price);
+        });
+        res.json(resObj);
+      })
+      .catch(err => {
+        if (err.response) {
+          console.log(err.response.data);
+          console.log(err.response.status);
+          console.log(err.response.headers);
+        } else if (err.request) {
+          console.log(err.request);
+        } else {
+          console.log("Error", err.message);
+        }
+        console.log(err.config);
+      });
+  });
+
+  app.get("/api/search/:symbol", (req, res) => {
+    axios
+      .get(
+        "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" +
+        req.params.symbol +
+        "&apikey=" +
+        keys.appKeys.alpha
+      )
+      .then(response => {
+        const dataArr = response.data["Time Series (Daily)"];
+        const resObj = [];
+
+        for (var key in dataArr) {
+          var day = dataArr[key];
+          resObj.push({ date: key, close: day["4. close"] });
+        }
+        res.json(resObj);
+      })
+      .catch(err => {
+        if (err.response) {
+          console.log(err.response.data);
+          console.log(err.response.status);
+          console.log(err.response.headers);
+        } else if (err.request) {
+          console.log(err.request);
+        } else {
+          console.log("Error", err.message);
+        }
+        console.log(err.config);
+      });
   });
 };

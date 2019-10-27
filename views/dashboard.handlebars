@@ -1,0 +1,12 @@
+<h1>This is a dashboard page</h1>
+
+<ul>
+    {{#each stocks}}
+    <li>
+        <span id="symbols">{{symbol}}</span><span id="prices">{{price}}</span>
+    </li>
+    {{/each}}
+</ul>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
