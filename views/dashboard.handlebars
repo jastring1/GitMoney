@@ -1,12 +1,28 @@
-<h1>This is a dashboard page</h1>
+<div class="container mb-5">
+    <h1>This is a dashboard page</h1>
+    <div class="row">
+        <div class="col-sm-9 bg-light border rounded-left rounded-lg mr-auto">
+            <h2>Your Stocks Herererererrererererererererererererererererer</h2>
+            <ul>
+                {{#each stocks}}
+                <li>
+                    <span id="symbols">{{symbol}} </span><span id="prices">{{price}}</span>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col-sm-3 border rounded-right rounded-lg sidebar">
+            <h2>Sidebar goes herereerereer</h2>
+        </div>
+    </div>
 
-<ul>
-    {{#each stocks}}
-    <li>
-        <span id="symbols">{{symbol}}</span><span id="prices">{{price}}</span>
-    </li>
-    {{/each}}
-</ul>
+</div>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+
+<!-- Load c3.css -->
+<link href="/styles/c3.css" rel="stylesheet">
+
+<!-- Load d3.js and c3.js -->
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="/js/c3.min.js"></script>
+<script src="/js/dashboard.js"></script>
