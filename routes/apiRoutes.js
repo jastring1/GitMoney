@@ -7,24 +7,24 @@ var axios = require("axios");
 //   'api_token': keys.appKeys.wt
 // };
 
-module.exports = function (app) {
+module.exports = function(app) {
   // Get all examples
-  app.get("/api/examples", function (req, res) {
-    db.Example.findAll({}).then(function (dbExamples) {
+  app.get("/api/examples", function(req, res) {
+    db.Example.findAll({}).then(function(dbExamples) {
       res.json(dbExamples);
     });
   });
 
   // Create a new example
-  app.post("/api/examples", function (req, res) {
-    db.Example.create(req.body).then(function (dbExample) {
+  app.post("/api/examples", function(req, res) {
+    db.Example.create(req.body).then(function(dbExample) {
       res.json(dbExample);
     });
   });
 
   // Delete an example by id
-  app.delete("/api/examples/:id", function (req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function (
+  app.delete("/api/examples/:id", function(req, res) {
+    db.Example.destroy({ where: { id: req.params.id } }).then(function(
       dbExample
     ) {
       res.json(dbExample);
@@ -35,7 +35,7 @@ module.exports = function (app) {
     axios
       .get(
         "https://api.worldtradingdata.com/api/v1/stock?symbol=SNAP,TWTR,VOD.L&api_token=" +
-        keys.appKeys.wt
+          keys.appKeys.wt
       )
       .then(response => {
         const dataArr = response.data.data;
@@ -70,17 +70,23 @@ module.exports = function (app) {
     axios
       .get(
         "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" +
-        req.params.symbol +
-        "&apikey=" +
-        keys.appKeys.alpha
+          req.params.symbol +
+          "&apikey=" +
+          keys.appKeys.alpha
       )
       .then(response => {
         const dataArr = response.data["Time Series (Daily)"];
-        const resObj = [];
+        const resObj = {
+          keyPair: [],
+          dateArr: ["x"],
+          closeArr: ["Close"]
+        };
 
         for (var key in dataArr) {
           var day = dataArr[key];
-          resObj.push({ date: key, close: day["4. close"] });
+          resObj.keyPair.push({ date: key, close: day["4. close"] });
+          resObj.dateArr.push(key);
+          resObj.closeArr.push(day["4. close"]);
         }
         res.json(resObj);
       })
