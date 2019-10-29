@@ -17,6 +17,7 @@ module.exports = function(app) {
 
   // Create a new example
   app.post("/api/examples", function(req, res) {
+    console.log(req.body);
     db.Example.create(req.body).then(function(dbExample) {
       res.json(dbExample);
     });
@@ -102,5 +103,16 @@ module.exports = function(app) {
         }
         console.log(err.config);
       });
+  });
+
+  //favorite sequelize test (create)
+  app.post("/api/favorites", function(req, res) {
+    console.log(req.body);
+    db.Favorite.create({
+      symbol: req.body.symbol,
+      note: req.body.note
+    }).then(() => {
+      res.status(204).end();
+    });
   });
 };

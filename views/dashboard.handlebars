@@ -12,7 +12,24 @@
             </ul>
         </div>
         <div class="col-sm-3 border rounded-right rounded-lg sidebar">
-            <h2>Sidebar goes herereerereer</h2>
+            <h2>Your Favorites</h2>
+            {{#each favorite}}
+            {{/each}}
+            <h4>Add a favorite stock</h4>
+            <form>
+                <div class="form-group">
+                    <label for="symbolLabel">Symbol</label>
+                    <input type="text" class="form-control" id="symbolInput" aria-describedby="symbolHelp"
+                        placeholder="Enter symbol">
+                    <small id="symbolHelp" class="form-text text-muted">Needs to be a valid stock symbol(i.e. MSFT)</small>
+                </div>
+                <div class="form-group">
+                    <label for="noteLabel">Note</label>
+                    <input type="text" class="form-control" id="noteInput" placeholder="Enter Note">
+                     <small id="noteHelp" class="form-text text-muted">(Optional, 1-144 characters)</small>
+                </div>
+                <button id="favoriteSubmit" type="submit" class="btn btn-primary">Add</button>
+            </form>
         </div>
     </div>
 
