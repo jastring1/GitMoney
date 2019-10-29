@@ -105,12 +105,29 @@ module.exports = function(app) {
       });
   });
 
-  //favorite sequelize test (create)
-  app.post("/api/favorites", function(req, res) {
-    console.log(req.body);
+  //favorite sequelize get all
+  app.get("/api/favorites", (req, res) => {
+    db.Favorite.findAll({}).then(data => {
+      res.json(data);
+    });
+  });
+
+  //favorite sequelize create
+  app.post("/api/favorites", (req, res) => {
     db.Favorite.create({
       symbol: req.body.symbol,
       note: req.body.note
+    }).then(() => {
+      res.status(204).end();
+    });
+  });
+
+  //favorite sequelize delete
+  app.delete("/api/favorites/:id", (req, res) => {
+    db.Favorite.destroy({
+      where: {
+        id: req.params.id
+      }
     }).then(() => {
       res.status(204).end();
     });
