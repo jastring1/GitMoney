@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
   "name": "handlebars-boilerplate",
-=======
-  "name": "Project-2",
->>>>>>> 80895d3719c43c1faec3bfc2a54fffcfe62dad21
   "version": "1.0.0",
   "description": "Project-2",
   "main": "server.js",

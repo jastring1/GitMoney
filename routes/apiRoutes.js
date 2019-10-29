@@ -8,6 +8,26 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/api/:symbol/:date", function(req, res) {
+    db.stockEntries
+      .findAll({
+        where: { symbol: req.params.symbol, specificDate: req.params.date }
+      })
+      .then(function(dbExample) {
+        var singleDay = dbExample[0].dataValues;
+        var returnObj = {
+          symbol: singleDay.symbol,
+          date: singleDay.specificDate,
+          open: singleDay.openVal,
+          close: singleDay.closeVal,
+          high: singleDay.highVal,
+          low: singleDay.lowVal,
+          volume: singleDay.volume
+        };
+        res.json(returnObj);
+      });
+  });
+
   // Create a new example
   app.post("/api/examples", function(req, res) {
     db.Example.create(req.body).then(function(dbExample) {
