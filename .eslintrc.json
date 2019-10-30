@@ -2,12 +2,9 @@
     "env": {
         "browser": true,
         "commonjs": true,
-        "node": true
+        "node": true,
+        "es6": true
     },
-    "extends": "prettier",
-    "plugins": [
-        "prettier"
-      ],
     "rules": {
         "no-duplicate-case":"error",
         "no-empty":"error",
@@ -20,7 +17,7 @@
         "eqeqeq": "error",
         "no-empty-function": "error",
         "no-multi-spaces": "error",
-        "no-unused-vars": "error",
+        "no-unused-vars": "warn",
         "camelcase": "error",
         "indent": [
             "error",
@@ -33,7 +30,6 @@
         "semi": [
             "error",
             "always"
-        ],
-        "prettier/prettier": "error"
+        ]
     }
 }
