@@ -42,7 +42,7 @@ module.exports = function (app) {
   app.get("/historical/:symbol/:start/:end", function (req, res) {
     db.stockEntries
       .findAll({
-        where: { symbol: req.params.symbol, specificDate: { [Op.between]: [req.params.start, req.params.end] } }
+        where: { symbol: req.params.symbol, specificDate: { [Op.between] : [req.params.start, req.params.end] } }
       })
       .then(function (data) {
         var stockArray = [];
@@ -66,7 +66,6 @@ module.exports = function (app) {
           close: stockArray[stockArray.length - 1].close,
           change: ((((stockArray[stockArray.length - 1].close) - stockArray[0].open) / stockArray[0].open) * 100).toPrecision(4)
         }
-        console.log(returnObj);
         res.render("example2", {
           example: returnObj
         });
