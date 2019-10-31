@@ -15,7 +15,6 @@ var searchSubmit = () => {
   }
   $("#symbolInput").val("");
 
-
   $.ajax("/api/search/" + symbol).then(response => {
     $("#stockNameHeader").append("<h3>Results for stock: " + symbol.toUpperCase() + "<h3>");
     const dateArr = response.dateArr;
