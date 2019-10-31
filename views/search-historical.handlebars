@@ -1,17 +1,17 @@
 
 <ul class="nav justify-content-center bg-light">
     <li class="nav-item">
-        <a class="nav-link disabled" href="/search" tabindex="-1" aria-disabled="true">Live Search</a>
+        <a class="nav-link active" href="/search">Switch to Live Search</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" href="/search-historical">Switch to Historical Search</a>
+        <a class="nav-link disabled" href="/search-historical" tabindex="-1" aria-disabled="true">Historical Search</a>
     </li>
 </ul>
 
 <div class="container mb-5">
 
     <form class="mb-5 mt-3">
-        <h2>Search for Live Stock Data</h2>
+        <h2>Search for Historical Stock Data</h2>
         <div class="form-group">
             <label for="symbolInput">Symbol</label>
             <input type="symbol" class="form-control" id="symbolInput" aria-describedby="emailHelp"
@@ -145,4 +145,4 @@
 <!-- Load d3.js and c3.js -->
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="/js/c3.min.js"></script>
-<script src="/js/search.js"></script>
+<script src="/js/searchHistorical.js"></script>

@@ -9,15 +9,15 @@ var axios = require("axios");
 //   'api_token': keys.appKeys.wt
 // };
 
-module.exports = function(app) {
+module.exports = function (app) {
   // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
+  app.get("/api/examples", function (req, res) {
+    db.Example.findAll({}).then(function (dbExamples) {
       res.json(dbExamples);
     });
   });
   // Renders a json object to the page with stock information spanning the dates selected
-  app.get("/api/:symbol/:start/:end", function(req, res) {
+  app.get("/api/:symbol/:start/:end", function (req, res) {
     db.stockEntries
       .findAll({
         where: {
@@ -27,7 +27,7 @@ module.exports = function(app) {
           }
         }
       })
-      .then(function(data) {
+      .then(function (data) {
         var stockArray = [];
         for (var i = 0; i < data.length; i++) {
           var singleDay = data[i].dataValues;
@@ -58,16 +58,16 @@ module.exports = function(app) {
   });
 
   // Create a new example
-  app.post("/api/examples", function(req, res) {
+  app.post("/api/examples", function (req, res) {
     console.log(req.body);
-    db.Example.create(req.body).then(function(dbExample) {
+    db.Example.create(req.body).then(function (dbExample) {
       res.json(dbExample);
     });
   });
 
   // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(
+  app.delete("/api/examples/:id", function (req, res) {
+    db.Example.destroy({ where: { id: req.params.id } }).then(function (
       dbExample
     ) {
       res.json(dbExample);
@@ -78,7 +78,7 @@ module.exports = function(app) {
     axios
       .get(
         "https://api.worldtradingdata.com/api/v1/stock?symbol=SNAP,TWTR,VOD.L&api_token=" +
-          keys.appKeys.wt
+        keys.appKeys.wt
       )
       .then(response => {
         const dataArr = response.data.data;
@@ -109,26 +109,42 @@ module.exports = function(app) {
       });
   });
 
-  app.get("/api/search/:symbol", (req, res) => {
+  app.post("/api/livesearch", (req, res) => {
     axios
       .get(
-        "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" +
-          req.params.symbol +
-          "&apikey=" +
-          keys.appKeys.alpha
+        "https://www.alphavantage.co/query?function=" +
+        req.body.period + "&symbol=" +
+        req.body.symbol +
+        "&apikey=" +
+        keys.appKeys.alpha
       )
       .then(response => {
-        const dataArr = response.data["Time Series (Daily)"];
-        // const dataArr = response.data["Weekly Time Series"];
+        // console.log(response.data);
+        if (req.body.period === "TIME_SERIES_DAILY_ADJUSTED") {
+          var dataArr = response.data["Time Series (Daily)"];
+        } else if (req.body.period === "TIME_SERIES_WEEKLY_ADJUSTED") {
+          var dataArr = response.data["Weekly Adjusted Time Series"];
+        } else {
+          var dataArr = response.data["Monthly Adjusted Time Series"];
+        }
+
         const resObj = {
           keyPair: [],
           dateArr: ["x"],
-          closeArr: ["Close"]
+          closeArr: ["Close"],
+          openArr: []
         };
 
         for (var key in dataArr) {
           var day = dataArr[key];
-          resObj.keyPair.push({ date: key, close: day["4. close"] });
+          resObj.keyPair.push({ 
+            date: key, 
+            open: day["1. open"],
+            high: day["2. high"],
+            low: day["3. low"],
+            close: day["4. close"], 
+            volume: day["6. volume"]
+          });
           resObj.dateArr.push(key);
           resObj.closeArr.push(day["4. close"]);
         }

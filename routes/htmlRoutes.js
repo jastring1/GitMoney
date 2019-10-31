@@ -119,9 +119,14 @@ module.exports = function (app) {
   //     console.log(err.config);
   //   });
 
-  //search
+  //live-search
   app.get("/search", (req, res) => {
     res.render("search");
+  });
+
+  //historical-search
+  app.get("/search-historical", (req, res) => {
+    res.render("search-historical");
   });
 
   // Render 404 page for any unmatched routes
