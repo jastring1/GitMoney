@@ -14,11 +14,6 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
         field: "open_val"
       },
-      closeVal: {
-        type: DataTypes.DECIMAL,
-        allowNull: false,
-        field: "close_val"
-      },
       highVal: {
         type: DataTypes.DECIMAL,
         allowNull: false,
@@ -28,6 +23,11 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.DECIMAL,
         allowNull: false,
         field: "low_val"
+      },
+      closeVal: {
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+        field: "close_val"
       },
       volume: {
         type: DataTypes.INTEGER(12),

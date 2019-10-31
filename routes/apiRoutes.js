@@ -9,38 +9,18 @@ module.exports = function(app) {
       res.json(dbExamples);
     });
   });
-  //renders a json object of a single stock/single day data
-  app.get("/api/:symbol/:date", function(req, res) {
-    db.stockEntries
-      .findAll({
-        where: { symbol: req.params.symbol, specificDate: req.params.date }
-      })
-      .then(function(dbExample) {
-        var singleDay = dbExample[0].dataValues;
-        var returnObj = {
-          symbol: singleDay.symbol,
-          date: singleDay.specificDate,
-          open: singleDay.openVal,
-          close: singleDay.closeVal,
-          high: singleDay.highVal,
-          low: singleDay.lowVal,
-          volume: singleDay.volume
-        };
-        res.json(returnObj);
-      });
-  });
   // Renders a json object to the page with stock information spanning the dates selected
-  app.get("/api/:symbol/:start/:end", function (req, res) {
+  app.get("/api/:symbol/:start/:end", function(req, res) {
     db.stockEntries
       .findAll({
         where: {
-          symbol: req.params.symbol, 
+          symbol: req.params.symbol,
           specificDate: {
-            [Op.between]:  [req.params.start, req.params.end]
+            [Op.between]: [req.params.start, req.params.end]
           }
         }
       })
-      .then(function (data) {
+      .then(function(data) {
         var stockArray = [];
         for (var i = 0; i < data.length; i++) {
           var singleDay = data[i].dataValues;
@@ -51,7 +31,7 @@ module.exports = function(app) {
             open: singleDay.openVal,
             close: singleDay.closeVal,
             volume: singleDay.volume
-          }
+          };
           stockArray.push(stockObj);
         }
         var returnObj = {
@@ -60,8 +40,12 @@ module.exports = function(app) {
           endDate: stockArray[stockArray.length - 1].date,
           open: stockArray[0].open,
           close: stockArray[stockArray.length - 1].close,
-          change: ((((stockArray[stockArray.length - 1].close) - stockArray[0].open) / stockArray[0].open) * 100).toPrecision(4)
-        }
+          change: (
+            ((stockArray[stockArray.length - 1].close - stockArray[0].open) /
+              stockArray[0].open) *
+            100
+          ).toPrecision(4)
+        };
         res.json(returnObj);
       });
   });

@@ -2,57 +2,41 @@ var db = require("../models");
 var Sequelize = require("sequelize");
 var Op = Sequelize.Op;
 
-module.exports = function (app) {
+module.exports = function(app) {
   // Load index page
-  app.get("/", function (req, res) {
-    db.Example.findAll({}).then(function (dbExamples) {
+  app.get("/", function(req, res) {
+    db.Example.findAll({}).then(function(dbExamples) {
       res.render("index", {
         msg: "Welcome!",
         examples: dbExamples
       });
     });
   });
-  // Renders example.handlebars with an object containing stock data for a specific day
-  app.get("/historical/:symbol/:date", function (req, res) {
-    db.stockEntries
-      .findAll({
-        where: { symbol: req.params.symbol, specificDate: req.params.date }
-      })
-      .then(function (data) {
-        var singleDay = data[0].dataValues;
-        var stockObj = {
-          symbol: singleDay.symbol,
-          date: singleDay.specificDate,
-          open: singleDay.openVal,
-          close: singleDay.closeVal,
-          change: (
-            ((singleDay.closeVal - singleDay.openVal) / singleDay.openVal) *
-            100
-          ).toPrecision(4),
-          high: singleDay.highVal,
-          low: singleDay.lowVal,
-          volume: singleDay.volume
-        };
-        res.render("example", {
-          example: stockObj
-        });
-      });
-  });
+
   //This returns an Array of objects that contain stock information between the two given dates passed in the url
-  app.get("/historical/:symbol/:start/:end", function (req, res) {
+  app.get("/historical/:symbol/:start/:end", function(req, res) {
     db.stockEntries
       .findAll({
         where: {
-          symbol: req.params.symbol, 
+          symbol: req.params.symbol,
           specificDate: {
-            [Op.between]:  [req.params.start, req.params.end]
+            [Op.between]: [req.params.start, req.params.end]
           }
         }
       })
-      .then(function (data) {
+      .then(function(data) {
+        console.log(data)
         var stockArray = [];
+        var currentHigh = 0;
+        var currentLow = 1000;
         for (var i = 0; i < data.length; i++) {
           var singleDay = data[i].dataValues;
+          if (singleDay.highVal > currentHigh){
+            currentHigh = singleDay.highVal;
+          }
+          if (singleDay.lowVal < currentLow){
+            currentLow = singleDay.lowVal;
+          }
           var stockObj = {
             date: singleDay.specificDate,
             high: singleDay.highVal,
@@ -60,7 +44,7 @@ module.exports = function (app) {
             open: singleDay.openVal,
             close: singleDay.closeVal,
             volume: singleDay.volume
-          }
+          };
           stockArray.push(stockObj);
         }
         var returnObj = {
@@ -69,16 +53,22 @@ module.exports = function (app) {
           endDate: stockArray[stockArray.length - 1].date,
           open: stockArray[0].open,
           close: stockArray[stockArray.length - 1].close,
-          change: ((((stockArray[stockArray.length - 1].close) - stockArray[0].open) / stockArray[0].open) * 100).toPrecision(4)
-        }
-        res.render("example2", {
-          example: returnObj
+          high: currentHigh,
+          low: currentLow,
+          change: (
+            ((stockArray[stockArray.length - 1].close - stockArray[0].open) /
+              stockArray[0].open) *
+            100
+          ).toPrecision(4)
+        };
+        res.render("historical-data", {
+          historical: returnObj
         });
       });
   });
 
   // Render 404 page for any unmatched routes
-  app.get("*", function (req, res) {
+  app.get("*", function(req, res) {
     res.render("404");
   });
-}
+};
