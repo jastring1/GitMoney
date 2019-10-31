@@ -5,6 +5,22 @@
             <label for="symbolInput">Symbol</label>
             <input type="symbol" class="form-control" id="symbolInput" aria-describedby="emailHelp"
                 placeholder="Enter stock symbol">
+
+
+            <div class="row" aria-describedby="dateHelp">
+                <div class="col-sm-4">
+                    <select class="form-control mt-3" id="exampleFormControlSelect1">
+                        <option value="TIME_SERIES_DAILY">Daily time Series</option>
+                        <option value="TIME_SERIES_WEEKLY">Weekly Time Series</option>
+                    </select>
+                </div>
+                <div class="col-sm-8">
+                    <label for="symbolInput">Start Date</label>
+                    <input class="form-control" placeholder="">
+                    <label for="symbolInput">End Date</label>
+                    <input class="form-control" placeholder="">
+                </div>
+            </div>
         </div>
         <button id="submit" type="submit" class="btn btn-primary">Submit</button>
     </form>
@@ -26,17 +42,16 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title">Form Error</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Modal body text goes here.</p>
+                    <p>Please make sure all fields have been filled correctly.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>

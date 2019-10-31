@@ -119,6 +119,7 @@ module.exports = function(app) {
       )
       .then(response => {
         const dataArr = response.data["Time Series (Daily)"];
+        // const dataArr = response.data["Weekly Time Series"];
         const resObj = {
           keyPair: [],
           dateArr: ["x"],

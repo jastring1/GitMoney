@@ -10,13 +10,15 @@ var searchSubmit = () => {
     .trim();
 
   if (symbol === "") {
-    // return alert("Please enter a symbol");
     return $("#emptyInput").modal("show");
   }
+
   $("#symbolInput").val("");
+  $("#chart").empty();
+  $("#stockNameHeader").empty();
 
   $.ajax("/api/search/" + symbol).then(response => {
-    $("#stockNameHeader").append("<h3>Results for stock: " + symbol.toUpperCase() + "<h3>");
+    $("#stockNameHeader").append("<h3>Results for Stock: " + symbol.toUpperCase() + "<h3>");
     const dateArr = response.dateArr;
     const closeArr = response.closeArr;
     console.log(response);
