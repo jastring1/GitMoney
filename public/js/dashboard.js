@@ -52,6 +52,8 @@ const handleFavSubmit = event => {
     data: favorite
   }).then(() => {
     reloadFavorites();
+    $("#symbolInput").val("");
+    $("#noteInput").val("");
   });
 };
 

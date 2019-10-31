@@ -2,6 +2,9 @@ module.exports = function(sequelize, DataTypes) {
   var Favorite = sequelize.define("Favorite", {
     symbol: {
       type: DataTypes.STRING,
+      set(val) {
+        this.setDataValue("symbol", val.toUpperCase());
+      },
       allowNull: false,
       validate: {
         len: [1, 5]
