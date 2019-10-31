@@ -4,6 +4,7 @@ console.log("loaded");
 
 var searchSubmit = () => {
   event.preventDefault();
+
   var symbol = $("#symbolInput")
     .val()
     .trim();
@@ -12,9 +13,11 @@ var searchSubmit = () => {
     // return alert("Please enter a symbol");
     return $("#emptyInput").modal("show");
   }
+  $("#symbolInput").val("");
+
 
   $.ajax("/api/search/" + symbol).then(response => {
-    $("#stockNameHeader").append("<h3>Results for stock: " + symbol + "<h3>");
+    $("#stockNameHeader").append("<h3>Results for stock: " + symbol.toUpperCase() + "<h3>");
     const dateArr = response.dateArr;
     const closeArr = response.closeArr;
     console.log(response);
