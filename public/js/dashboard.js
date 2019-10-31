@@ -33,6 +33,7 @@ const reloadFavorites = () => {
 const handleFavSubmit = event => {
   event.preventDefault();
 
+
   let favorite = {
     symbol: $("#symbolInput")
       .val()
@@ -52,6 +53,8 @@ const handleFavSubmit = event => {
     data: favorite
   }).then(() => {
     reloadFavorites();
+    $("#symbolInput").val("");
+    $("#noteInput").val("");
   });
 };
 
