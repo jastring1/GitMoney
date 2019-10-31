@@ -3,6 +3,7 @@ var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
+var $stocksBtn = $("#apiCall");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -26,6 +27,12 @@ var API = {
     return $.ajax({
       url: "api/examples/" + id,
       type: "DELETE"
+    });
+  },
+  stocksCall: () => {
+    return $.get("/api/stocks", data => {
+      $("#symbols").text(data.symbols);
+      $("#prices").text(data.prices);
     });
   }
 };
@@ -94,6 +101,12 @@ var handleDeleteBtnClick = function() {
   });
 };
 
+//stocks api test
+var stocksButtonClick = () => {
+  API.stocksCall();
+};
+
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
+$stocksBtn.on("click", stocksButtonClick);

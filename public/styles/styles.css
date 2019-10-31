@@ -1,3 +1,16 @@
 .list-group-item {
   line-height: 2.5;
 }
+
+.sidebar {
+  background-color: wheat;
+}
+
+#apiCall {
+  color: red;
+}
+
+.nav-item.active {
+  color: teal;
+  background-color: red;
+}
