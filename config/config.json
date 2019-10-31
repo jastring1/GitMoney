@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "root",
-    "database": "favoritedb",
+    "database": "stocks",
     "host": "localhost",
     "dialect": "mysql"
   },
