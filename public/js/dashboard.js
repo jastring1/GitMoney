@@ -8,13 +8,17 @@ const reloadFavorites = () => {
     type: "GET"
   }).then(data => {
     var $favorites = data.map(function (favorite) {
-      var $btn = $("<button>").text(favorite.symbol);
+      var $btn = $("<button>")
+        .attr({
+          class:"stockLink",
+          "data-value": favorite.symbol
+        })
+        .text(favorite.symbol);
 
       var $li = $("<li>")
         .attr({
-          class: "list-group-item stockLink",
+          class: "list-group-item",
           "data-id": favorite.id,
-          "data-value": favorite.symbol
         })
         .append($btn);
 
