@@ -134,8 +134,12 @@ module.exports = function (app) {
           closeArr: ["Close"],
           openArr: []
         };
-
+        let count = 0;
         for (var key in dataArr) {
+          count ++;
+          if (count > 100) {
+            break;
+          }
           var day = dataArr[key];
           resObj.keyPair.push({ 
             date: key, 

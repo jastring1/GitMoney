@@ -32,7 +32,16 @@ var searchSubmit = () => {
     }
 
     $("#stockNameHeader").append("<h3>Results for Stock: " + searchObj.symbol.toUpperCase() + "<h3>");
+    $("thead").empty();
+    $("thead")
+      .append("<th scope='col'>Date</th>")
+      .append("<th scope='col'>Open($)</th>")
+      .append("<th scope='col'>High($)</th>")
+      .append("<th scope='col'>Low($)</th>")
+      .append("<th scope='col'>Close($)</th>")
+      .append("<th scope='col'>volume</th>");
     $("tbody").empty();
+
     response.keyPair.forEach(el => {
       let dateTd = $("<td>").text(el.date);
       let openTd = $("<td>").text(el.open);
