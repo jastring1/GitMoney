@@ -1,3 +1,119 @@
+.navbar-light .navbar-nav .nav-link {
+  color: whitesmoke;
+  }
+  .navbar-light .navbar-nav .nav-link:hover {
+  color: #1DCD9C;
+  }
+
+/* .navbar-light .nav-item.active .nav-link,
+.navbar-light .nav-item .nav-link:active,
+.navbar-light .nav-item .nav-link:focus,
+.navbar-light .nav-item:hover .nav-link {
+    color: #00B159;
+} */
+.container-fluid {
+  width: 100%;
+  padding-right: 0px;
+}
+
+
+.jumbotron {
+  background-color:#1DCD9C !important; 
+  position: relative;
+  z-index: -3;
+  height: 25rem;
+  padding: 0px !important;
+}
+
+#jumbotron-text {
+  padding-left: 3em;
+}
+
+
+.video-background {
+  position: relative;
+  float: right;
+  overflow: hidden;
+  z-index: -2;
+  width: auto;
+  height: 25rem;
+  
+}
+.search-div {
+  color: #fff;
+  background-color: #000;
+  height: 20rem; 
+  padding-top: 5rem;
+  padding-right: 25%;
+  padding-left: 25%;
+}
+.btn {
+  background-color: #1DCD9C;
+}
+
+
+.parallax {
+  /* The image used */
+  /* background-image: url("/images/parabg.jpg"); */
+  opacity: 1;
+  
+
+  /* Set a specific height */
+  min-height: 300px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.parallax::after {
+  min-height: 300px; 
+  content: "";
+  background-image: url("/images/parabg.jpg");
+  opacity: 0.4;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  z-index: -4;   
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#c3-dsiplay {
+  background-color: #fff;
+  padding-top: 2em;
+  padding-right: 2em;
+}
+
+p {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size:2vw;
+  
+}
+
+h1 {
+  font-family: 'Roboto Slab', serif;
+  font-size:3vw;
+}
+
+h2 {
+  font-family: 'Source Sans Pro', sans-serif;  
+  font-weight: 700;
+  font-size:6vw;
+}
+
+h3 {
+  font-family: 'Roboto Slab', serif;
+  font-size:5vw;
+  font-weight: 700;
+}
+
 .list-group-item {
   line-height: 2.5;
 }
@@ -15,13 +131,106 @@
   background-color: red;
 }
 
-.bg-light {
-  background-color: #1DCD9C!important;
+.navbar-light .navbar-nav .nav-link {
+  color: #000;
+  padding-right: 1em;
 }
 
-/* body {background-color:#1DCD9C;
-} */
+.bg-light {
+  padding-left: 4rem;
+  color: #000;
+  background-color: #fff!important;
+  font-family: 'Source Sans Pro', sans-serif;  
 
-/* #home {
-  background-color: #999999;
-} */
+}
+
+/* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+  position: fixed;
+  right: 0;
+  top: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+/* Add some content at the bottom of the video/page */
+.content {
+  position: fixed;
+  /* float: left; */
+  top: 0;
+  background: #1DCD9C;
+  color: #f1f1f1;
+  width: 65%;
+  height: 100%;
+  padding: 0;
+  opacity: 1;
+  padding-top: 15rem;
+  padding-left: 5rem;
+}
+
+#logo {
+  width: 75%;
+}
+
+
+
+.fa-facebook:before {
+  font-size: 1.5em;
+  content: "\f09a";
+}
+.fa-github:before {
+  font-size: 1.5em;
+  content: "\f09b";
+}
+
+.fa-comment-dollar:before {
+  font-size: 1.5em;
+  content: "\f651";
+}
+
+#search-container {
+  padding-left: 5rem;
+  padding-right: 5rem;
+  padding-top: 10rem;
+  /* background: #1DCD9C; */
+}
+
+#search-column {
+  background: #1DCD9C;
+  width: 65%;
+  height: 100%;
+
+}
+
+.my-custom-scrollbar {
+  position: relative;
+  height: 350px;
+  overflow: auto;
+  }
+  .table-wrapper-scroll-y {
+  display: block;
+  }
+
+@media only screen and (max-width: 600px) {
+  .content {
+  position: fixed;
+  top: 0;
+  background: #1DCD9C;
+  color: #f1f1f1;
+  width: 100%;
+  height: 65%;
+  padding: 0;
+  opacity: .97;
+  padding-top: 10rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  }
+  #logo {
+    width: 100%;
+    }
+  h1 {
+    font-family: 'Roboto Slab', serif;
+      font-size:5vw;
+    }
+}
