@@ -49,6 +49,10 @@ const handleFavSubmit = event => {
     return alert("Dont leave symbol empty");
   }
 
+  if (favorite.symbol > 5) {
+    return alert("Please insert a valid symbol between 1 and 5 characters.");
+  }
+
   $.ajax({
     type: "POST",
     url: "/api/favorites",
