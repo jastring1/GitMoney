@@ -8,6 +8,7 @@ const reloadFavorites = () => {
   }).then(data => {
     var $favorites = data.map(function(favorite) {
       var $a = $("<a>").text(favorite.symbol);
+      var $n = $("<br/><a>").text(favorite.note);
 
       var $li = $("<li>")
         .attr({
@@ -21,6 +22,8 @@ const reloadFavorites = () => {
         .text("ｘ");
 
       $li.append($button);
+      $li.append($n);
+
 
       return $li;
     });

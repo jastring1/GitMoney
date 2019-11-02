@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
-        notEmpty: false,
+        // notEmpty: true,
         len: [0, 144]
       }
     }
