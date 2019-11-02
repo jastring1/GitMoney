@@ -1,0 +1,148 @@
+
+<ul class="nav justify-content-center bg-light">
+    <li class="nav-item">
+        <a class="nav-link active" href="/search">Switch to Live Search</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled" href="/search-historical" tabindex="-1" aria-disabled="true">Historical Search</a>
+    </li>
+</ul>
+
+<div class="container mb-5">
+
+    <form class="mb-5 mt-3">
+        <h2>Search for Historical Stock Data</h2>
+        <div class="form-group">
+            <label for="symbolInput">Symbol</label>
+            <input type="symbol" class="form-control" id="symbolInput" aria-describedby="emailHelp"
+                placeholder="Enter stock symbol">
+
+            <div class="row mt-3" aria-describedby="dateHelp">
+                <div class="col-sm-4">
+                    <label for="periodSelect">Time Series Type</label>
+                    <select class="form-control" id="periodSelect">
+                        <option value="TIME_SERIES_DAILY_ADJUSTED">Daily time Series</option>
+                        <option value="TIME_SERIES_WEEKLY_ADJUSTED">Weekly Time Series</option>
+                        <option value="TIME_SERIES_MONTHLY_ADJUSTED">Monthly Time Series</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <div id="stockNameHeader">
+    </div>
+    <div id="chart"></div>
+
+    <h3 class="mt-5">Raw Data Table</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Open($)</th>
+                <th scope="col">High($)</th>
+                <th scope="col">Low($)</th>
+                <th scope="col">Close($)</th>
+                <th scope="col">Volume</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="modal" tabindex="-1" role="dialog" id="emptyInput">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Form Error</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Please make sure all fields have been filled correctly.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="invalidSymbol">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Invalid Symbol</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Please make sure you have entered a valid stock Symbol.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Load c3.css -->
+<link href="/styles/c3.css" rel="stylesheet">
+
+<!-- Load d3.js and c3.js -->
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="/js/c3.min.js"></script>
+<script src="/js/searchHistorical.js"></script>

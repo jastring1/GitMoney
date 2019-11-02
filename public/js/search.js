@@ -5,27 +5,57 @@ console.log("loaded");
 var searchSubmit = () => {
   event.preventDefault();
 
-  var symbol = $("#symbolInput")
-    .val()
-    .trim();
+  var searchObj = {
+    symbol: $("#symbolInput").val().trim(),
+    period: $("#periodSelect :selected").val()
+  };
 
-  if (symbol === "") {
-    // return alert("Please enter a symbol");
+  if (searchObj.symbol === "") {
     return $("#emptyInput").modal("show");
   }
-  $("#symbolInput").val("");
 
-  $.ajax("/api/search/" + symbol).then(response => {
-    $("#stockNameHeader").append("<h3>Results for stock: " + symbol.toUpperCase() + "<h3>");
+  //$("#symbolInput").val("");
+
+  $.ajax({
+    type: "POST",
+    url: "/api/livesearch",
+    data: searchObj
+  }).then(response => {
+    console.log(response);
     const dateArr = response.dateArr;
     const closeArr = response.closeArr;
-    console.log(response);
+
+    if (dateArr.length === 1) {
+      return $("#invalidSymbol").modal("show");
+    }
+
+    $("#chart").empty();
+    $("#stockNameHeader").empty();
+    $("#stockNameHeader").append("<h3>Results for Stock: " + searchObj.symbol.toUpperCase() + "<h3>");
+    $("thead").empty();
+    $("thead")
+      .append("<th scope='col'>Date</th>")
+      .append("<th scope='col'>Open($)</th>")
+      .append("<th scope='col'>High($)</th>")
+      .append("<th scope='col'>Low($)</th>")
+      .append("<th scope='col'>Close($)</th>")
+      .append("<th scope='col'>volume</th>");
+    $("tbody").empty();
+
     response.keyPair.forEach(el => {
-      var dateTd = $("<td>").text(el.date);
-      var closeTd = $("<td>").text(el.close);
-      var newRow = $("<tr>")
+      let dateTd = $("<td>").text(el.date);
+      let openTd = $("<td>").text(el.open);
+      let highTd = $("<td>").text(el.high);
+      let lowTd = $("<td>").text(el.low);
+      let closeTd = $("<td>").text(el.close);
+      let volumeTd = $("<td>").text(el.volume);
+      let newRow = $("<tr>")
         .append(dateTd)
-        .append(closeTd);
+        .append(openTd)
+        .append(highTd)
+        .append(lowTd)
+        .append(closeTd)
+        .append(volumeTd);
       $("tbody").append(newRow);
     });
     var chart = c3.generate({
@@ -42,13 +72,7 @@ var searchSubmit = () => {
             position: "middle"
           },
           tick: {
-            values: [
-              dateArr[2],
-              dateArr[26],
-              dateArr[51],
-              dateArr[76],
-              dateArr[100]
-            ]
+            format: "%Y-%m-%d"
           }
         },
         y: {

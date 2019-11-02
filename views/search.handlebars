@@ -1,46 +1,144 @@
-<div class="container mb-5">
-    <h2>Search for stock history</h2>
-    <form class="mb-5">
-        <div class="form-group">
-            <label for="symbolInput">Symbol</label>
-            <input type="symbol" class="form-control" id="symbolInput" aria-describedby="emailHelp"
-                placeholder="Enter stock symbol">
-        </div>
-        <button id="submit" type="submit" class="btn btn-primary">Submit</button>
-    </form>
-    <div id="stockNameHeader">
-    </div>
-    <div id="chart"></div>
-    <table class="table mt-5">
-        <thead>
-            <tr>
-                <th scope="col">Date</th>
-                <th scope="col">Close</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+<ul class="nav justify-content-center bg-light">
+    <li class="nav-item">
+        <a class="nav-link disabled" href="/search" tabindex="-1" aria-disabled="true">Live Search</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="/search-historical">Switch to Historical Search</a>
+    </li>
+</ul>
 
-    <div class="modal" tabindex="-1" role="dialog" id="emptyInput">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container-fluid">
+        <div class="row" id="jumbotron-text">
+            <div class="col-md-6">
+                <br>
+                <br>
+                <br>
+                <h3>You Can Do It!</h3>
+                <p><i class="fas fa-search"></i> Search for a stock.<br>
+                    <i class="fas fa-chart-line"></i> View its performance history.<br>
+                    <i class="fas fa-hand-holding-usd"></i> GITMONEY!
+                </p>
+
+
+
+
+
+            </div>
+
+
+            <div class="col-md-6">
+
+                <video class="video-background" preload="true" muted="true" autoplay="true" loop="true">
+                    <source src="/videos/greenscreen.mov" type="video/mp4" />
+                </video>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<div class="parallax"></br></br></br>
+    <h1>
+        <center>
+            <id="quote">“An investment in knowledge pays the best interest.”
+                <br>- Benjamin Franklin
+        </center>
+    </h1>
+    </id>
+</div>
+<div class="search-div">
+    <div class="text-center">
+        <p>Search Stock History</p>
+        <form class="mb-5">
+            <div class="input-group mb-3">
+                <input type="symbol" class="form-control" id="symbolInput" aria-describedby="emailHelp"
+                    placeholder="Enter Stock Symbol (ex. MSFT)">
+                <div class="row mt-3" aria-describedby="dateHelp">
+                    <div class="col-sm-4">
+                        <label for="periodSelect">Time Series Type</label>
+                        <select class="form-control" id="periodSelect">
+                            <option value="TIME_SERIES_DAILY_ADJUSTED">Daily time Series</option>
+                            <option value="TIME_SERIES_WEEKLY_ADJUSTED">Weekly Time Series</option>
+                            <option value="TIME_SERIES_MONTHLY_ADJUSTED">Monthly Time Series</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                <div class="input-group-append">
+                    <button id="submit" type="submit" class="btn btn-dark">Submit</button>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+
+<div class="container-fluid" id="c3-dsiplay">
+    <div class="row">
+        <div class="col-md-6">
+            <div id="stockNameHeader">
+            </div>
+            <div id="chart"></div>
+        </div>
+        <div class="col-md-6">
+            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+                <table class="table table-bordered table-striped mb-0">
+                    <thead>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
+</div>
+</div>
+
+
+
+<div class="modal" tabindex="-1" role="dialog" id="emptyInput">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Empty Input</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Make sure symbol input field is not empty.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="invalidSymbol">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Invalid Symbol</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Please make sure you have entered a valid stock Symbol.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </div>
 
