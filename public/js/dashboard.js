@@ -18,7 +18,7 @@ const reloadFavorites = () => {
       var $li = $("<li>")
         .attr({
           class: "list-group-item",
-          "data-id": favorite.id,
+          "data-id": favorite.id
         })
         .append($btn);
 
