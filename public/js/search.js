@@ -61,6 +61,9 @@ var searchSubmit = () => {
           label: {
             text: "Last 100 Days",
             position: "middle"
+          },
+          tick: {
+            format: "%Y-%m-%d"
           }
         },
         y: {
