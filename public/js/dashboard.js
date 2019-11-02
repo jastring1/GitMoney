@@ -31,7 +31,6 @@ const reloadFavorites = () => {
       $li.append($button);
       $li.append($n);
 
-
       return $li;
     });
 
@@ -56,8 +55,8 @@ const handleFavSubmit = event => {
     return alert("Dont leave symbol empty");
   }
 
-  if (favorite.symbol > 5) {
-    return alert("Please insert a valid symbol between 1 and 5 characters.");
+  if (favorite.symbol.length > 5) {
+    return $("#tooLongSymbol").modal("show");
   }
 
   $.ajax({
