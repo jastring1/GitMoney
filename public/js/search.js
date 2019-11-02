@@ -15,8 +15,6 @@ var searchSubmit = () => {
   }
 
   //$("#symbolInput").val("");
-  $("#chart").empty();
-  $("#stockNameHeader").empty();
 
   $.ajax({
     type: "POST",
@@ -31,6 +29,8 @@ var searchSubmit = () => {
       return $("#invalidSymbol").modal("show");
     }
 
+    $("#chart").empty();
+    $("#stockNameHeader").empty();
     $("#stockNameHeader").append("<h3>Results for Stock: " + searchObj.symbol.toUpperCase() + "<h3>");
     $("thead").empty();
     $("thead")
@@ -47,8 +47,8 @@ var searchSubmit = () => {
       let openTd = $("<td>").text(el.open);
       let highTd = $("<td>").text(el.high);
       let lowTd = $("<td>").text(el.low);
-      let closeTd = $("<td>").text(el.close);  
-      let volumeTd = $("<td>").text(el.volume); 
+      let closeTd = $("<td>").text(el.close);
+      let volumeTd = $("<td>").text(el.volume);
       let newRow = $("<tr>")
         .append(dateTd)
         .append(openTd)
