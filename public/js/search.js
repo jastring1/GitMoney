@@ -14,8 +14,6 @@ var searchSubmit = () => {
     return $("#emptyInput").modal("show");
   }
 
-  //$("#symbolInput").val("");
-
   $.ajax({
     type: "POST",
     url: "/api/livesearch",
@@ -29,10 +27,13 @@ var searchSubmit = () => {
       return $("#invalidSymbol").modal("show");
     }
 
+    //removing previous search
     $("#chart").empty();
     $("#stockNameHeader").empty();
-    $("#stockNameHeader").append("<h3>Results for Stock: " + searchObj.symbol.toUpperCase() + "<h3>");
     $("thead").empty();
+
+    //printing table
+    $("#stockNameHeader").append("<h3>Results for Stock: " + searchObj.symbol.toUpperCase() + "<h3>");
     $("thead")
       .append("<th scope='col'>Date</th>")
       .append("<th scope='col'>Open($)</th>")
@@ -41,7 +42,6 @@ var searchSubmit = () => {
       .append("<th scope='col'>Close($)</th>")
       .append("<th scope='col'>volume</th>");
     $("tbody").empty();
-
     response.keyPair.forEach(el => {
       let dateTd = $("<td>").text(el.date);
       let openTd = $("<td>").text(el.open);
@@ -58,6 +58,8 @@ var searchSubmit = () => {
         .append(volumeTd);
       $("tbody").append(newRow);
     });
+
+    //generating chart
     var chart = c3.generate({
       bindto: "#chart",
       data: {
@@ -68,7 +70,6 @@ var searchSubmit = () => {
         x: {
           type: "timeseries",
           label: {
-            text: "Last 100 Days",
             position: "middle"
           },
           tick: {

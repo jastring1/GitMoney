@@ -10,7 +10,7 @@ const reloadFavorites = () => {
     var $favorites = data.map(function (favorite) {
       var $btn = $("<button>")
         .attr({
-          class:"stockLink",
+          class: "stockLink",
           "data-value": favorite.symbol
         })
         .text(favorite.symbol);
@@ -87,12 +87,12 @@ var loadChart = function () {
 
   var searchObj = {
     symbol: $(this).attr("data-value"),
-    period: "TIME_SERIES_DAILY_ADJUSTED"
+    period: "TIME_SERIES_INTRADAY"
   };
 
   $.ajax({
     type: "POST",
-    url: "/api/livesearch",
+    url: "/api/intrasearch",
     data: searchObj
   }).then(response => {
     console.log(response);
@@ -123,22 +123,23 @@ var loadChart = function () {
       bindto: "#" + currentChart,
       data: {
         x: "x",
+        xFormat: "%Y-%m-%d %H:%M:%S",
         columns: [dateArr, closeArr]
       },
       axis: {
         x: {
           type: "timeseries",
           label: {
-            text: "Last 100 Days",
+            text: "Today (5min)",
             position: "middle"
           },
           tick: {
-            format: "%Y-%m-%d"
+            format: "%H:%M:%S"
           }
         },
         y: {
           label: {
-            text: "Closing Price",
+            text: "Price",
             position: "middle"
           },
           tick: {
