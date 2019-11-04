@@ -1,12 +1,15 @@
-<ul class="nav justify-content-center bg-light">
-    <li class="nav-item">
-        <a class="nav-link disabled" href="/search" tabindex="-1" aria-disabled="true">Live Search</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link active" href="/search-historical">Switch to Historical Search</a>
-    </li>
-</ul>
-
+<div class="container-fluid" id="secondary-search-menu">
+    <ul class="nav justify-content-center bg-primary">
+        <li class="nav-item">
+            <a class="nav-link disabled" href="/search" tabindex="-1" aria-disabled="true"><i
+                    class="fas fa-stopwatch"></i> LIVE SEARCH</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="/search-historical"><i class="far fa-calendar-alt"></i> SWITCH TO
+                HISTORICAL SEARCH</a>
+        </li>
+    </ul>
+</div>
 <div class="jumbotron jumbotron-fluid">
     <div class="container-fluid">
         <div class="row" id="jumbotron-text">
@@ -15,16 +18,12 @@
                 <br>
                 <br>
                 <h3>You Can Do It!</h3>
-                <p><i class="fas fa-search"></i> Search for a stock.<br>
-                    <i class="fas fa-chart-line"></i> View its performance history.<br>
-                    <i class="fas fa-hand-holding-usd"></i> GITMONEY!
+                <p>
+                    <i class="fas fa-search"></i> Search for a stock.
+                        <br><i class="fas fa-chart-line"></i> View its performance history.
+                            <br><i class="fas fa-hand-holding-usd"></i> GITMONEY!
                 </p>
-
-
-
-
-
-            </div>
+                </div>
 
 
             <div class="col-md-6">
@@ -33,16 +32,10 @@
                     <source src="/videos/greenscreen.mov" type="video/mp4" />
                 </video>
             </div>
-
-
-
-
-        </div>
+            </div>
     </div>
 </div>
-</div>
-</div>
-</div>
+
 <div class="parallax"></br></br></br>
     <h1>
         <center>
@@ -54,37 +47,48 @@
 </div>
 <div class="search-div">
     <div class="text-center">
-        <p>Search Stock History</p>
-        <form class="mb-5">
-            <div class="input-group mb-3">
-                <input type="symbol" class="form-control" id="symbolInput" aria-describedby="emailHelp"
-                    placeholder="Enter Stock Symbol (ex. MSFT)">
-                <div class="row mt-3" aria-describedby="dateHelp">
-                    <div class="col-sm-4">
-                        <label for="periodSelect">Time Series Type</label>
-                        <select class="form-control" id="periodSelect">
-                            <option value="TIME_SERIES_DAILY_ADJUSTED">Daily time Series</option>
-                            <option value="TIME_SERIES_WEEKLY_ADJUSTED">Weekly Time Series</option>
-                            <option value="TIME_SERIES_MONTHLY_ADJUSTED">Monthly Time Series</option>
-                        </select>
+        <p><i class="fas fa-chart-bar"></i> Search for a stock and view its recent performance.<br>
+
+            <form>
+
+                <div class="form-row">
+                    <div class="col">
+                        <input type="text" class="form-control" id="symbolInput"
+                            placeholder="Enter Stock Symbol (ex. MSFT)">
                     </div>
-                </div>
-                <div class="input-group-append">
-                    <button id="submit" type="submit" class="btn btn-dark">Submit</button>
-        </form>
+                    <div class="col">
+                        <div class="form-group">
+                            <select class="form-control" id="periodSelect">
+                                <option value="TIME_SERIES_DAILY_ADJUSTED">100 Days</option>
+                                <option value="TIME_SERIES_WEEKLY_ADJUSTED">100 Weeks</option>
+                                <option value="TIME_SERIES_MONTHLY_ADJUSTED">100 Months</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" id="submit" class="btn btn-primary btn-lg btn-block"><i
+                            class="fas fa-search"></i> Search</button>
+            </form>
+    </div>
+    <div class="arrow bounce">
+        <a class="fas fa-chevron-down" href="#c3-display"></a>
+
     </div>
 </div>
 </div>
-</div>
 
-<div class="container-fluid" id="c3-dsiplay">
+
+
+
+
+<div class="container-fluid" id="c3-display">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
+
             <div id="stockNameHeader">
             </div>
             <div id="chart"></div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="table-wrapper-scroll-y my-custom-scrollbar">
 
                 <table class="table table-bordered table-striped mb-0">
@@ -97,8 +101,6 @@
         </div>
     </div>
 </div>
-</div>
-</div>
 
 
 
@@ -106,16 +108,16 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Empty Input</h5>
+                <h5 class="modal-title"><i class="fas fa-exclamation-circle"></i> Empty Input</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Make sure symbol input field is not empty.</p>
+                <h5>Please make sure symbol input field is not empty.</h5>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
             </div>
         </div>
     </div>
@@ -125,21 +127,18 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Invalid Symbol</h5>
+                <h5 class="modal-title"><i class="fas fa-exclamation-circle"></i> Invalid Stock Symbol</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Please make sure you have entered a valid stock Symbol.</p>
+                <h5>Please make sure you have entered a valid stock symbol.</h5>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-</div>
-
 </div>
 
 <!-- Load c3.css -->

@@ -6,7 +6,8 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab|Source+Sans+Pro&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab|Source+Sans+Pro&display=swap"
+    rel="stylesheet">
   <title>GitMoney</title>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -23,7 +24,7 @@
 <body>
 
   <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/"><img src="/images/icon.png" width="20" alt="GitMoney Icon"></a>
+    <a class="navbar-brand" href=""><img src="/images/icon.png" width="20" alt="GitMoney Icon"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -33,40 +34,62 @@
         <li class="nav-item" id="navLanding">
           <a class="nav-link" href="/">HOME<span class="sr-only">(current)</span></a>
         </li>
-         <li class="nav-item" id="navSearch">
+        <li class="nav-item" id="navSearch">
           <a class="nav-link" href="/search"> SEARCH</a>
         </li>
         <li class="nav-item" id="navDashboard">
           <a class="nav-link" href="/dashboard">DASHBOARD</a>
         </li>
-       
-      </ul>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item" id="navSearch">
-          <a class="nav-link" href="https://github.com/JohnCdev/Project-2"> <i class="fa fa-github"></i></a>
-        </li>
-        <li class="nav-item" id="navSearch">
-          <a class="nav-link" href=""> <i class="fab fa-facebook"></i></a>
-        </li>
-        <li class="nav-item" id="navSearch">
-          <a class="nav-link" href=""> <i class="fas fa-comment-dollar"></i>
 
-          </a>
-        </li>
       </ul>
+
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary ml-auto" id="team-button" data-toggle="modal"
+        data-target="#exampleModal">
+        <i class="fas fa-users"></i> Team
+      </button>
+
     </div>
 
     </div>
   </nav>
 
   {{{body}}}
-  
 
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-users"></i> Our Team</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              John Carver</li>
+            <li class="list-group-item">
+              Jeffrey Huddleston</li>
+            <li class="list-group-item">
+              Anthony McPherson</li>
+            <li class="list-group-item">
+              James Stringfield</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Footer -->
   <footer class="page-footer font-small bg-dark">
     <!-- Copyright -->
-    <div class="footer-copyright text-center py-3 text-light"> GitMoney -
-      <a class="text-primary" href="https://github.com/JohnCdev/Project-2"> Repo</a>
+    <div class="footer-copyright text-left py-3 text-light">
+      <a class="nav-link" href="https://github.com/JohnCdev/Project-2"><i class="fa fa-github"></i> GitHub
+        Repository</a>
     </div>
 
   </footer>
