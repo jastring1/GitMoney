@@ -109,13 +109,67 @@ module.exports = function (app) {
         const resObj = {
           keyPair: [],
           dateArr: ["x"],
-          closeArr: ["Close"],
-          openArr: []
+          closeArr: ["Close"]
         };
+
         let count = 0;
         for (var key in dataArr) {
           count ++;
           if (count > 100) {
+            break;
+          }
+          var day = dataArr[key];
+          resObj.keyPair.push({ 
+            date: key, 
+            open: day["1. open"],
+            high: day["2. high"],
+            low: day["3. low"],
+            close: day["4. close"], 
+            volume: day["6. volume"]
+          });
+          resObj.dateArr.push(key);
+          resObj.closeArr.push(day["4. close"]);
+        }
+        res.json(resObj);
+      })
+      .catch(err => {
+        if (err.response) {
+          console.log(err.response.data);
+          console.log(err.response.status);
+          console.log(err.response.headers);
+        } else if (err.request) {
+          console.log(err.request);
+        } else {
+          console.log("Error", err.message);
+        }
+        console.log(err.config);
+      });
+  });
+
+  //need new livesearch endpoint for dashboard intraday
+  app.post("/api/intrasearch", (req,res) => {
+    axios
+      .get(
+        "https://www.alphavantage.co/query?function=" + 
+        req.body.period + 
+        "&symbol=" +
+        req.body.symbol +
+        "&interval=5min&apikey=" +
+        keys.appKeys.alpha
+      )
+      .then(response => {
+
+        const dataArr = response.data["Time Series (5min)"];
+        const resObj = {
+          keyPair: [],
+          dateArr: ["x"],
+          closeArr: ["Price"]
+        };
+
+        let count = 0;
+        for (var key in dataArr) {
+          count ++;
+          if (count > 77) {
             break;
           }
           var day = dataArr[key];
