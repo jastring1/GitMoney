@@ -27,22 +27,20 @@ var searchSubmit = () => {
     type: "GET",
     url: searchURL,
   }).then(response => {
-    const dateArr = [];
-    const closeArr = [];
-    dateArr.push("x");
-    closeArr.push("close");
+
+    const dateArr = []; dateArr.push("x");
+    const closeArr = []; closeArr.push("close");
+    const openArr = []; openArr.push("open");
+    const highArr = []; highArr.push("high");
+    const lowArr = []; lowArr.push("low");
 
     for (var i=0;i<response.dataArr.length;i++){
       dateArr.push(response.dataArr[i].date);
       closeArr.push(response.dataArr[i].close);
+      openArr.push(response.dataArr[i].open);
+      highArr.push(response.dataArr[i].high);
+      lowArr.push(response.dataArr[i].low);
     }
-    console.log(dateArr);
-    console.log(closeArr);
-
-    if (dateArr.length === 1) {
-      return $("#invalidSymbol").modal("show");
-    }
-
     //removing previous search
     $("#chart").empty();
     $("#stockNameHeader").empty();
@@ -63,7 +61,6 @@ var searchSubmit = () => {
 
     $("#meta-body").append("<tr><td>" + response.open + "</td><td>" + response.close + "</td><td>" +
      response.change + "</td><td>" + response.high + "</td><td>" + response.low + "</td><td>" + response.volume + "</td></tr>");
-
 
     //printing table
     $("#stockNameHeader2").append("<h4>All Results<h4>");
@@ -91,13 +88,12 @@ var searchSubmit = () => {
         .append(volumeTd);
       $("#main-body").append(newRow);
     });
-
     //generating chart
     var chart = c3.generate({
       bindto: "#chart",
       data: {
         x: "x",
-        columns: [dateArr, closeArr]
+        columns: [dateArr, closeArr, openArr, highArr, lowArr]
       },
       axis: {
         x: {
