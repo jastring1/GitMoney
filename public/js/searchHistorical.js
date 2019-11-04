@@ -1,4 +1,5 @@
 var $submit = $("#submit");
+//var moment = require("moment");
 
 console.log("loaded");
 
@@ -18,7 +19,10 @@ var searchSubmit = () => {
     to: $("#toYearSelect :selected").val() + "-" + $("#toMonthSelect :selected").val() + "-" +$("#toDaySelect :selected").val(),
   };
   var searchURL = "/api/" + searchObj.symbol + "/" + searchObj.from + "/" + searchObj.to;
-
+  
+  if (moment(searchObj.from) > moment(searchObj.to)){
+    return $("#invalidDate").modal("show");
+  }
   if (searchObj.symbol === "") {
     return $("#emptyInput").modal("show");
   }
@@ -27,6 +31,11 @@ var searchSubmit = () => {
     type: "GET",
     url: searchURL,
   }).then(response => {
+    //console.log(response);
+    
+    /*if (typeof response === undefined) {
+      return $("#invalidSymbol").modal("show");
+    }*/
 
     const dateArr = []; dateArr.push("x");
     const closeArr = []; closeArr.push("Close");
