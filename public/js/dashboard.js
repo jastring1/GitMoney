@@ -15,6 +15,13 @@ const reloadFavorites = () => {
         })
         .text(favorite.symbol);
 
+      var $n = $("<br/><a>")
+        .attr({
+          class: "faveNote",
+          "data-note": favorite.note
+        })
+        .text(favorite.note);
+
       var $li = $("<li>")
         .attr({
           class: "list-group-item",
@@ -27,6 +34,7 @@ const reloadFavorites = () => {
         .text("ｘ");
 
       $li.append($button);
+      $li.append($n);
 
       return $li;
     });
@@ -49,7 +57,11 @@ const handleFavSubmit = event => {
   };
 
   if (!favorite.symbol) {
-    return alert("Dont leave symbol empty");
+    return $("#invalidSymbol").modal("show");
+  }
+
+  if (favorite.symbol.length > 5) {
+    return $("#tooLongSymbol").modal("show");
   }
 
   $.ajax({
@@ -89,6 +101,8 @@ var loadChart = function () {
     symbol: $(this).attr("data-value"),
     period: "TIME_SERIES_INTRADAY"
   };
+  console.log(searchObj);
+
 
   $.ajax({
     type: "POST",
@@ -118,7 +132,7 @@ var loadChart = function () {
       .append($chart)
       .append($delBtn);
     $(".card-body")
-      .append($($cDiv));
+      .prepend($($cDiv));
     var chart = c3.generate({
       bindto: "#" + currentChart,
       data: {
