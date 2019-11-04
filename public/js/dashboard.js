@@ -99,15 +99,14 @@ var loadChart = function () {
 
   var searchObj = {
     symbol: $(this).attr("data-value"),
-    note: $(this).attr("data-note"),
-    period: "TIME_SERIES_DAILY_ADJUSTED"
+    period: "TIME_SERIES_INTRADAY"
   };
   console.log(searchObj);
 
 
   $.ajax({
     type: "POST",
-    url: "/api/livesearch",
+    url: "/api/intrasearch",
     data: searchObj
   }).then(response => {
     console.log(response);
@@ -141,22 +140,23 @@ var loadChart = function () {
       bindto: "#" + currentChart,
       data: {
         x: "x",
+        xFormat: "%Y-%m-%d %H:%M:%S",
         columns: [dateArr, closeArr]
       },
       axis: {
         x: {
           type: "timeseries",
           label: {
-            text: "Last 100 Days",
+            text: "Today (5min)",
             position: "middle"
           },
           tick: {
-            format: "%Y-%m-%d"
+            format: "%H:%M:%S"
           }
         },
         y: {
           label: {
-            text: "Closing Price",
+            text: "Price",
             position: "middle"
           },
           tick: {
