@@ -24,8 +24,20 @@ module.exports = function (app) {
       })
       .then(function (data) {
         var stockArray = [];
+        var currentHigh = 0;
+        var currentLow = 1000;
+        var highVolume = 0;
         for (var i = 0; i < data.length; i++) {
           var singleDay = data[i].dataValues;
+          if (singleDay.highVal > currentHigh){
+            currentHigh = singleDay.highVal;
+          }
+          if (singleDay.lowVal < currentLow){
+            currentLow = singleDay.lowVal;
+          }
+          if (singleDay.volume > highVolume){
+            highVolume = singleDay.volume;
+          }
           var stockObj = {
             date: singleDay.specificDate,
             high: singleDay.highVal,
@@ -42,11 +54,15 @@ module.exports = function (app) {
           endDate: stockArray[stockArray.length - 1].date,
           open: stockArray[0].open,
           close: stockArray[stockArray.length - 1].close,
+          high: currentHigh,
+          low: currentLow,
+          volume: highVolume,
           change: (
             ((stockArray[stockArray.length - 1].close - stockArray[0].open) /
               stockArray[0].open) *
             100
-          ).toPrecision(4)
+          ).toPrecision(4),
+          dataArr: stockArray
         };
         res.json(returnObj);
       });
