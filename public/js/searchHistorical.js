@@ -56,13 +56,13 @@ var searchSubmit = () => {
     $("#meta-head")
       .append("<th scope='col'>Initial Open($)</th>")
       .append("<th scope='col'>Final Close($)</th>")
-      .append("<th scope='col'>Overall High($)</th>")
-      .append("<th scope='col'>Overall Low($)</th>")
       .append("<th scope='col'>Change(%)</th>")
+      .append("<th scope='col'>Overall High($)</th>")
+      .append("<th scope='col'>Overall Low(%)</th>")
       .append("<th scope='col'>Highest Volume</th>");
 
     $("#meta-body").append("<tr><td>" + response.open + "</td><td>" + response.close + "</td><td>" +
-     response.high + "</td><td>" + response.low + "</td><td>" + response.change + "</td><td>" + response.volume + "</td></tr>");
+     response.change + "</td><td>" + response.high + "</td><td>" + response.low + "</td><td>" + response.volume + "</td></tr>");
 
 
     //printing table
