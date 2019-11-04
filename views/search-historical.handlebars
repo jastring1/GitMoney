@@ -45,7 +45,7 @@
     </h1>
     </id>
 </div>
-<div class="search-div">
+<div class="search-div" id="hist-search">
     <div class="text-center">
         <p><i class="fas fa-chart-bar"></i> Search for a stock and view its historical performance.<br>
 
@@ -58,7 +58,8 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-3">
                         <div class="form-group">
                             <p>From (YYYY/MM/DD)</p>
                             <select class="form-control" id="fromYearSelect">
@@ -120,8 +121,8 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-3">
                         <div class="form-group">
                             <p>To (YYYY/MM/DD)</p>
                             <select class="form-control" id="toYearSelect">
@@ -206,6 +207,7 @@
 <div class="container-fluid" id="c3-display">
     <div class="row">
         <div class="col-md-12">
+            <div id="chart"></div>
             <div id="stockNameHeader">
             </div>
             <table class="table table-bordered table-striped mb-0">
@@ -214,8 +216,6 @@
                 <tbody id="meta-body">
                 </tbody>
             </table>
-
-            <div id="chart"></div>
         </div>
         <div class="col-md-12">
             <div id="stockNameHeader2">

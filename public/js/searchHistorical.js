@@ -29,8 +29,8 @@ var searchSubmit = () => {
   }).then(response => {
     const dateArr = [];
     const closeArr = [];
-    //dateArr.push(["x"]);
-    //closeArr.push(["close"]);
+    dateArr.push("x");
+    closeArr.push("close");
 
     for (var i=0;i<response.dataArr.length;i++){
       dateArr.push(response.dataArr[i].date);
