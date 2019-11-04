@@ -29,10 +29,10 @@ var searchSubmit = () => {
   }).then(response => {
 
     const dateArr = []; dateArr.push("x");
-    const closeArr = []; closeArr.push("close");
-    const openArr = []; openArr.push("open");
-    const highArr = []; highArr.push("high");
-    const lowArr = []; lowArr.push("low");
+    const closeArr = []; closeArr.push("Close");
+    const openArr = []; openArr.push("Open");
+    const highArr = []; highArr.push("High");
+    const lowArr = []; lowArr.push("Low");
 
     for (var i=0;i<response.dataArr.length;i++){
       dateArr.push(response.dataArr[i].date);
@@ -107,7 +107,7 @@ var searchSubmit = () => {
         },
         y: {
           label: {
-            text: "Closing Price",
+            text: "Value($)",
             position: "middle"
           },
           tick: {
