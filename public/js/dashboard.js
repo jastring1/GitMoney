@@ -119,8 +119,6 @@ var loadChart = function () {
       return $("#invalidSymbol").modal("show");
     }
 
-    // let $chartNote = $("<div>").text(searchObj.note);
-
     let $delBtn = $("<button>")
       .attr({
         class: "deleteChart mb-3",
@@ -132,10 +130,9 @@ var loadChart = function () {
       .attr("id", currentChart + "Div")
       .append("<h4>" + searchObj.symbol + "</h4>")
       .append($chart)
-      // .append($chartNote)
       .append($delBtn);
     $(".card-body")
-      .append($($cDiv));
+      .prepend($($cDiv));
     var chart = c3.generate({
       bindto: "#" + currentChart,
       data: {
