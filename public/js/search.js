@@ -2,6 +2,13 @@ var $submit = $("#submit");
 
 console.log("loaded");
 
+
+$(document).ready(function() {
+  $("#submit").click(function() {
+    $("#c3-display").show();
+  });
+});
+
 var searchSubmit = () => {
   event.preventDefault();
 
@@ -33,14 +40,14 @@ var searchSubmit = () => {
     $("thead").empty();
 
     //printing table
-    $("#stockNameHeader").append("<h3>Results for Stock: " + searchObj.symbol.toUpperCase() + "<h3>");
+    $("#stockNameHeader").append("<h4>Results for Stock: " + searchObj.symbol.toUpperCase() + "<h4>");
     $("thead")
       .append("<th scope='col'>Date</th>")
       .append("<th scope='col'>Open($)</th>")
       .append("<th scope='col'>High($)</th>")
       .append("<th scope='col'>Low($)</th>")
       .append("<th scope='col'>Close($)</th>")
-      .append("<th scope='col'>volume</th>");
+      .append("<th scope='col'>Volume</th>");
     $("tbody").empty();
     response.keyPair.forEach(el => {
       let dateTd = $("<td>").text(el.date);
@@ -95,3 +102,4 @@ $("#emptyInput").on("shown.bs.modal", () => {
 });
 
 $submit.on("click", searchSubmit);
+

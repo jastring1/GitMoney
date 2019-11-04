@@ -1,71 +1,92 @@
-<div class="container mb-5">
-    <h1>This is a dashboard page</h1>
+<div class="jumbotron jumbotron-fluid" id="dashboard-jumbotron">
+    <div class="container text-center">
+        <img src="/images/gm.png" class="img-fluid" id="logo" alt="Responsive image">
+        <h1 class="display-4">Dashboard</h1>
+        <p class="lead">Keep track of all of your favorite stocks.</p>
+
+    </div>
+</div>
+</div>
+<div class="container-fluid">
     <div class="row">
-        <div class="col-sm-9 bg-light border rounded-left rounded-lg mr-auto">
-            <h2>Your Stocks Herererererrererererererererererererererererer</h2>
-            <ul>
+        <div class="col-md-12 sticky-top" id="favorite-searchbar-div">
+            <form>
+
+                <div class="form-row">
+                    <div class="col">
+                        <label for="symbolLabel"><i class="fas fa-chart-line"></i> Stock Symbol</label>
+                        <input type="text" class="form-control" id="symbolInput" aria-describedby="symbolHelp"
+                            placeholder="Enter Stock Symbol (ex. MSFT)">
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="noteLabel"><i class="fas fa-sticky-note"></i> Note</label>
+                            <input type="text" class="form-control" id="noteInput"
+                                placeholder="Optional, 1-144 characters">
+                        </div>
+                    </div>
+                    <button type="submit" id="favoriteSubmit" class="btn btn-primary btn-lg btn-block"><i
+                            class="fas fa-list"></i> Add to Favorites</button>
+            </form>
+        </div>
+    </div>
+    <div class="container-fluid" id="favorite-display-div">
+        <div class="row">
+            
+            <div class="col-md-4" id="favorite-header">
+                <div class="card-header bg-dark text-left"><i class="fas fa-thumbs-up"></i> My Favorite Stocks</div>
+
+                <ul id="favoriteList" class="list-group mb-5">
+                    {{#each favorites}}
+                    <li data-id="{{this.id}}" class="list-group-item">
+                        <a>{{this.symbol}}</a>
+                        <button class="btn btn-danger float-right delete">ｘ</button>
+                    </li>
+                    {{/each}}
+                </ul>
+            
+            </div>
+            <div class="col-md-8">
+
                 {{#each stocks}}
                 <li>
                     <span id="symbols">{{symbol}} </span><span id="prices">{{price}}</span>
                 </li>
                 {{/each}}
-            </ul>
-            <div class="card p-2">
-                <h5 class="card-title">Your Charts</h5>
-                <div class="card-body">
+                </ul>
+                <div class="card p-2">
+                    <div class="card-header bg-dark text-left"><i class="fas fa-chart-area"></i> Performance Charts
+                    </div>
+
+                    <div class="card-body">
+                        <div id="chart"></div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="invalidSymbol">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p class="modal-title"><i class="fas fa-exclamation-circle"></i> Invalid Symbol</p>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please make sure you have entered a valid stock Symbol.</p>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-3 pt-3 pb-3 border rounded-right rounded-lg sidebar">
-            <h3>Your Favorites</h3>
-            <ul id="favoriteList" class="list-group mb-5">
-                {{#each favorites}}
-                <li data-id="{{this.id}}" class="list-group-item">
-                    <a>{{this.symbol}}</a>
-                    <button class="btn btn-danger float-right delete">ｘ</button>
-                </li>
-                {{/each}}
-            </ul>
-            <h4>Add a favorite stock</h4>
-            <form>
-                <div class="form-group">
-                    <label for="symbolLabel">Symbol</label>
-                    <input type="text" class="form-control" id="symbolInput" aria-describedby="symbolHelp"
-                        placeholder="Enter symbol">
-                    <small id="symbolHelp" class="form-text text-muted">Needs to be a valid stock symbol(i.e.
-                        MSFT)</small>
-                </div>
-                <div class="form-group">
-                    <label for="noteLabel">Note</label>
-                    <input type="text" class="form-control" id="noteInput" placeholder="Enter Note">
-                    <small id="noteHelp" class="form-text text-muted">(Optional, 1-144 characters)</small>
-                </div>
-                <button id="favoriteSubmit" type="submit" class="btn btn-primary">Add</button>
-            </form>
-        </div>
-    </div>
 
-    <div class="modal" tabindex="-1" role="dialog" id="invalidSymbol">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Invalid Symbol</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Please make sure you have entered a valid stock Symbol.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
     </div>
-
 </div>
-
+</div>
 
 <!-- Load c3.css -->
 <link href="/styles/c3.css" rel="stylesheet">
