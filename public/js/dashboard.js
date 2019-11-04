@@ -15,7 +15,12 @@ const reloadFavorites = () => {
         })
         .text(favorite.symbol);
 
-      var $n = $("<br/><a>").text(favorite.note);
+      var $n = $("<br/><a>")
+        .attr({
+          class: "faveNote",
+          "data-note": favorite.note
+        })
+        .text(favorite.note);
 
       var $li = $("<li>")
         .attr({
@@ -52,7 +57,7 @@ const handleFavSubmit = event => {
   };
 
   if (!favorite.symbol) {
-    return alert("Dont leave symbol empty");
+    return $("#invalidSymbol").modal("show");
   }
 
   if (favorite.symbol.length > 5) {
@@ -94,8 +99,11 @@ var loadChart = function () {
 
   var searchObj = {
     symbol: $(this).attr("data-value"),
+    note: $(this).attr("data-note"),
     period: "TIME_SERIES_DAILY_ADJUSTED"
   };
+  console.log(searchObj);
+
 
   $.ajax({
     type: "POST",
@@ -112,6 +120,8 @@ var loadChart = function () {
       return $("#invalidSymbol").modal("show");
     }
 
+    // let $chartNote = $("<div>").text(searchObj.note);
+
     let $delBtn = $("<button>")
       .attr({
         class: "deleteChart mb-3",
@@ -123,6 +133,7 @@ var loadChart = function () {
       .attr("id", currentChart + "Div")
       .append("<h4>" + searchObj.symbol + "</h4>")
       .append($chart)
+      // .append($chartNote)
       .append($delBtn);
     $(".card-body")
       .append($($cDiv));
