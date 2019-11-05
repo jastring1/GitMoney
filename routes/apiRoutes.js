@@ -12,20 +12,32 @@ var axios = require("axios");
 module.exports = function (app) {
 
   // Renders a json object to the page with stock information spanning the dates selected
-  app.get("/api/:symbol/:start/:end", function (req, res) {
+  app.post("/api/historicalsearch", function (req, res) {
     db.stockEntries
       .findAll({
         where: {
-          symbol: req.params.symbol,
+          symbol: req.body.symbol,
           specificDate: {
-            [Op.between]: [req.params.start, req.params.end]
+            [Op.between]: [req.body.from, req.body.to]
           }
         }
       })
       .then(function (data) {
         var stockArray = [];
+        var currentHigh = 0;
+        var currentLow = 1000;
+        var highVolume = 0;
         for (var i = 0; i < data.length; i++) {
           var singleDay = data[i].dataValues;
+          if (singleDay.highVal > currentHigh){
+            currentHigh = singleDay.highVal;
+          }
+          if (singleDay.lowVal < currentLow){
+            currentLow = singleDay.lowVal;
+          }
+          if (singleDay.volume > highVolume){
+            highVolume = singleDay.volume;
+          }
           var stockObj = {
             date: singleDay.specificDate,
             high: singleDay.highVal,
@@ -42,38 +54,18 @@ module.exports = function (app) {
           endDate: stockArray[stockArray.length - 1].date,
           open: stockArray[0].open,
           close: stockArray[stockArray.length - 1].close,
+          high: currentHigh,
+          low: currentLow,
+          volume: highVolume,
           change: (
             ((stockArray[stockArray.length - 1].close - stockArray[0].open) /
               stockArray[0].open) *
             100
-          ).toPrecision(4)
+          ).toPrecision(4),
+          dataArr: stockArray
         };
         res.json(returnObj);
-      });
-  });
-
-  app.get("/api/stocks", (req, res) => {
-    axios
-      .get(
-        "https://api.worldtradingdata.com/api/v1/stock?symbol=SNAP,TWTR,VOD.L&api_token=" +
-        keys.appKeys.wt
-      )
-      .then(response => {
-        const dataArr = response.data.data;
-        // console.log(dataArr);
-        // const resObj = [];
-        const resObj = {
-          symbols: [],
-          prices: []
-        };
-        dataArr.forEach(el => {
-          // resObj.push({ price: el.price, symbol: el.symbol });
-          resObj.symbols.push(el.symbol);
-          resObj.prices.push(el.price);
-        });
-        res.json(resObj);
-      })
-      .catch(err => {
+      }).catch(err => {
         if (err.response) {
           console.log(err.response.data);
           console.log(err.response.status);
