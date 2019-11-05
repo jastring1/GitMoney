@@ -79,41 +79,6 @@ module.exports = function (app) {
       });
   });
 
-  app.get("/api/stocks", (req, res) => {
-    axios
-      .get(
-        "https://api.worldtradingdata.com/api/v1/stock?symbol=SNAP,TWTR,VOD.L&api_token=" +
-        keys.appKeys.wt
-      )
-      .then(response => {
-        const dataArr = response.data.data;
-        // console.log(dataArr);
-        // const resObj = [];
-        const resObj = {
-          symbols: [],
-          prices: []
-        };
-        dataArr.forEach(el => {
-          // resObj.push({ price: el.price, symbol: el.symbol });
-          resObj.symbols.push(el.symbol);
-          resObj.prices.push(el.price);
-        });
-        res.json(resObj);
-      })
-      .catch(err => {
-        if (err.response) {
-          console.log(err.response.data);
-          console.log(err.response.status);
-          console.log(err.response.headers);
-        } else if (err.request) {
-          console.log(err.request);
-        } else {
-          console.log("Error", err.message);
-        }
-        console.log(err.config);
-      });
-  });
-
   app.post("/api/livesearch", (req, res) => {
     axios
       .get(
