@@ -12,13 +12,13 @@ var axios = require("axios");
 module.exports = function (app) {
 
   // Renders a json object to the page with stock information spanning the dates selected
-  app.get("/api/:symbol/:start/:end", function (req, res) {
+  app.post("/api/historicalsearch", function (req, res) {
     db.stockEntries
       .findAll({
         where: {
-          symbol: req.params.symbol,
+          symbol: req.body.symbol,
           specificDate: {
-            [Op.between]: [req.params.start, req.params.end]
+            [Op.between]: [req.body.from, req.body.to]
           }
         }
       })

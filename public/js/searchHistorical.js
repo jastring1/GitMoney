@@ -16,7 +16,6 @@ var searchSubmit = () => {
     from: $("#fromYearSelect :selected").val() + "-" + $("#fromMonthSelect :selected").val() + "-" +$("#fromDaySelect :selected").val(),
     to: $("#toYearSelect :selected").val() + "-" + $("#toMonthSelect :selected").val() + "-" +$("#toDaySelect :selected").val(),
   };
-  var searchURL = "/api/" + searchObj.symbol + "/" + searchObj.from + "/" + searchObj.to;
   
   if (moment(searchObj.from) > moment(searchObj.to)){
     return $("#invalidDate").modal("show");
@@ -26,8 +25,9 @@ var searchSubmit = () => {
   }
 
   $.ajax({
-    type: "GET",
-    url: searchURL,
+    type: "POST",
+    url: "/api/historicalsearch",
+    data: searchObj
   }).then(response => {
     //console.log(response);
     
