@@ -1,8 +1,6 @@
 var $submit = $("#submit");
-//var moment = require("moment");
 
 console.log("loaded");
-
 
 $(document).ready(function() {
   $("#submit").click(function() {
