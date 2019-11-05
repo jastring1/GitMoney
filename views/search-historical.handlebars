@@ -1,147 +1,277 @@
-
-<ul class="nav justify-content-center bg-light">
-    <li class="nav-item">
-        <a class="nav-link active" href="/search">Switch to Live Search</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link disabled" href="/search-historical" tabindex="-1" aria-disabled="true">Historical Search</a>
-    </li>
-</ul>
-
-<div class="container mb-5">
-
-    <form class="mb-5 mt-3">
-        <h2>Search for Historical Stock Data</h2>
-        <div class="form-group">
-            <label for="symbolInput">Symbol</label>
-            <input type="symbol" class="form-control" id="symbolInput" aria-describedby="emailHelp"
-                placeholder="Enter stock symbol">
-
-            <div class="row mt-3" aria-describedby="dateHelp">
-                <div class="col-sm-4">
-                    <label for="periodSelect">Time Series Type</label>
-                    <select class="form-control" id="periodSelect">
-                        <option value="TIME_SERIES_DAILY_ADJUSTED">Daily time Series</option>
-                        <option value="TIME_SERIES_WEEKLY_ADJUSTED">Weekly Time Series</option>
-                        <option value="TIME_SERIES_MONTHLY_ADJUSTED">Monthly Time Series</option>
-                    </select>
-                </div>
+<div class="container-fluid" id="secondary-search-menu">
+    <ul class="nav justify-content-center bg-primary">
+        <li class="nav-item">
+            <a class="nav-link active" href="/search" tabindex="-1" aria-disabled="true"><i
+                    class="fas fa-stopwatch"></i>SWITCH TO LIVE SEARCH</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="/search-historical"><i class="far fa-calendar-alt"></i>HISTORICAL SEARCH</a>
+        </li>
+    </ul>
+</div>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container-fluid">
+        <div class="row" id="jumbotron-text">
+            <div class="col-md-6">
+                <br>
+                <br>
+                <br>
+                <h3>You Can Do It!</h3>
+                <p>
+                    <i class="fas fa-search"></i> Search for a stock.
+                    <br><i class="fas fa-chart-line"></i> View its performance history.
+                    <br><i class="fas fa-hand-holding-usd"></i> GITMONEY!
+                </p>
             </div>
-        </div>
-        <button id="submit" type="submit" class="btn btn-primary">Submit</button>
-    </form>
-
-    <div id="stockNameHeader">
-    </div>
-    <div id="chart"></div>
-
-    <h3 class="mt-5">Raw Data Table</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Date</th>
-                <th scope="col">Open($)</th>
-                <th scope="col">High($)</th>
-                <th scope="col">Low($)</th>
-                <th scope="col">Close($)</th>
-                <th scope="col">Volume</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-            </tr>
-            <tr>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-            </tr>
-            <tr>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-            </tr>
-            <tr>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-            </tr>
-            <tr>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-            </tr>
-            <tr>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div class="modal" tabindex="-1" role="dialog" id="emptyInput">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Form Error</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Please make sure all fields have been filled correctly.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+            <div class="col-md-6">
+                <video class="video-background" preload="true" muted="true" autoplay="true" loop="true">
+                    <source src="/videos/greenscreen.mov" type="video/mp4" />
+                </video>
             </div>
         </div>
     </div>
-
-    <div class="modal" tabindex="-1" role="dialog" id="invalidSymbol">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Invalid Symbol</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Please make sure you have entered a valid stock Symbol.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
 
+<div class="parallax"></br></br></br>
+    <h1>
+        <center>
+            <id="quote">“An investment in knowledge pays the best interest.”
+                <br>- Benjamin Franklin
+        </center>
+    </h1>
+    </id>
+</div>
+<div class="search-div" id="hist-search">
+    <div class="text-center">
+        <p><i class="fas fa-chart-bar"></i> Search for a stock and view its historical performance.<br>
+            <form>
+                <div class="form-row">
+                    <div class="col">
+                        <input type="text" class="form-control" id="symbolInput"
+                            placeholder="Enter Stock Symbol (ex. MSFT)">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <p>From (YYYY/MM/DD)</p>
+                            <select class="form-control" id="fromYearSelect">
+                                <option value="2014">2014</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="fromMonthSelect">
+                                <option value="01">1</option>
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                                <option value="05">5</option>
+                                <option value="06">6</option>
+                                <option value="07">7</option>
+                                <option value="08">8</option>
+                                <option value="09">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="fromDaySelect">
+                                <option value="01">1</option>
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                                <option value="05">5</option>
+                                <option value="06">6</option>
+                                <option value="07">7</option>
+                                <option value="08">8</option>
+                                <option value="09">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <p>To (YYYY/MM/DD)</p>
+                            <select class="form-control" id="toYearSelect">
+                                <option value="2014">2014</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="toMonthSelect">
+                                <option value="01">1</option>
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                                <option value="05">5</option>
+                                <option value="06">6</option>
+                                <option value="07">7</option>
+                                <option value="08">8</option>
+                                <option value="09">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="toDaySelect">
+                                <option value="01">1</option>
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                                <option value="05">5</option>
+                                <option value="06">6</option>
+                                <option value="07">7</option>
+                                <option value="08">8</option>
+                                <option value="09">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <button type="submit" id="submit" class="btn btn-primary btn-lg btn-block"><i
+                            class="fas fa-search"></i>
+                        Search</button>
+                </div>
+            </form>
+    </div>
+    <div class="arrow bounce">
+        <a class="fas fa-chevron-down" href="#c3-display"></a>
+    </div>
+</div>
+</div>
+<div class="container-fluid" id="c3-display">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="chart"></div>
+            <div id="stockNameHeader">
+            </div>
+            <table class="table table-bordered table-striped mb-0">
+                <thead id="meta-head">
+                </thead>
+                <tbody id="meta-body">
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12">
+            <div id="stockNameHeader2">
+            </div>
+            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table table-bordered table-striped mb-0">
+                    <thead id="main-head">
+                    </thead>
+                    <tbody id="main-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="emptyInput">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-exclamation-circle"></i> Empty Input</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Please make sure symbol input field is not empty.</h5>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="invalidSymbol">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-exclamation-circle"></i> Invalid Stock Symbol</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Please make sure you have entered a valid stock symbol.</h5>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="invalidDate">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-exclamation-circle"></i> Invalid Dates</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Please make sure you have entered a valid Date range.</h5>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Load c3.css -->
 <link href="/styles/c3.css" rel="stylesheet">
-
 <!-- Load d3.js and c3.js -->
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="/js/c3.min.js"></script>

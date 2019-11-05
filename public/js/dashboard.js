@@ -129,6 +129,7 @@ var loadChart = function () {
     let $cDiv = $("<div>")
       .attr("id", currentChart + "Div")
       .append("<h4>" + searchObj.symbol + "</h4>")
+      .append("<h5>" + moment().format("MMM Do YY") +"</h5>")
       .append($chart)
       .append($delBtn);
     $(".card-body")
